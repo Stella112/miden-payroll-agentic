@@ -1,0 +1,19 @@
+[package]
+name = "distribute-payroll"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+miden = { version = "0.10" }
+
+[package.metadata.miden]
+project-kind = "tx-script"
+
+[package.metadata.miden.dependencies]
+payroll-account = { path = "../payroll-account" }
+
+[package.metadata.component.target.dependencies]
+"miden:payroll-account/payroll-account" = { path = "../payroll-account/wit" }

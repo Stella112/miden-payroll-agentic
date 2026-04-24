@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface: #0d0a05;
+  --color-surface-2: #160f05;
+  --color-primary: #ff8c00;
+  --color-primary-dim: #e07800;
+  --color-accent: #ffb347;
+  --color-accent-dim: #e09530;
+  --color-danger: #ff4d6d;
+  --color-text: #ffffff;
+  --color-text-muted: #a09080;
+  --color-glass-bg: rgba(22, 15, 5, 0.60);
+  --color-glass-border: rgba(255, 140, 0, 0.18);
+  --font-sans: 'Outfit', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-glass-border);
+  border-radius: 99px;
+}
+
+/* ── Glass card utility ── */
+.glass {
+  background: var(--color-glass-bg);
+  border: 1px solid var(--color-glass-border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 1rem;
+  box-shadow:
+    0 4px 32px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 140, 0, 0.05) inset;
+}
+
+/* ── Orange glow for inputs ── */
+.input-glow:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.22), 0 0 16px rgba(255, 140, 0, 0.14);
+}
+
+/* ── Gradient text ── */
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Shimmer button ── */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg,
+      var(--color-primary),
+      var(--color-accent),
+      var(--color-primary));
+  color: #0d0a05;
+  background-size: 200% auto;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  border: none;
+  border-radius: 0.625rem;
+  padding: 0.85rem 2rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+  animation: shimmer 1.4s linear infinite;
+  box-shadow: 0 0 28px rgba(255, 140, 0, 0.55), 0 0 60px rgba(255, 179, 71, 0.30);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Card entrance animation ── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.anim-fade-up {
+  animation: fadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Spinner ── */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  width: 1.1rem;
+  height: 1.1rem;
+  border: 2px solid rgba(8, 12, 20, 0.35);
+  border-top-color: #080c14;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+/* ── Pulse glow on network badge ── */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 6px rgba(255, 140, 0, 0.45);
+  }
+
+  50% {
+    box-shadow: 0 0 18px rgba(255, 140, 0, 0.85);
+  }
+}
+
+.badge-pulse {
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
